@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <style>
+        #conteudo {
+            padding: 30px 0px;
+        }
+
+        span{
+            margin: 0px 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <header><h1>Tags Html</h1></header>
+    
+    <nav>
+        <a href="./tagsTexto.html">Tags de texto</a> |
+        <a href="./listas.html">Tags de listas</a>|
+        <a href="./teste-1.html">Teste</a>|
+    </nav>
+
+    <section id="conteudo"></section>
+
+    <footer><p>Curso html.</p></footer>
+
+    <script>
+
+        //Código para substituir um conteúdo em uma section especifica com html de outro arquivo através de um link.
+
+        document.querySelectorAll('a').forEach(link => {//Seleciona todos os links da página e faz um foreach no array de links.
+            const conteudo = document.getElementById('conteudo');//Coloca o elemento de id conteudo na constante conteudo.
+
+            link.onclick = function(e) {//Para cada click no link executa a função.
+                e.preventDefault();//Previne o comportamento padrão da ação(neste caso o onclick)
+
+                fetch(link.href)//Faz uma requisição ajax nos links e retorna uma promise.
+                    .then(resp => resp.text())//Retorna outra promise com o conteúdo html do link.
+                    .then(html => conteudo.innerHTML = html);//adiciona o conteúdo html recebido na ultima promise ao corpo do conteúdo. 
+            };
+
+            console.log(conteudo);
+        });
+    </script>
+
+</body>
+
+</html>
